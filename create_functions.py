@@ -44,10 +44,6 @@ def create_instance(client, resource, id_image, name, id_security_group, user_da
         )
         # instance[0].wait_until_running()
         waiter.wait(InstanceIds=[instance[0].id])
-        # response = client.describe_instance_status(InstanceIds=[instance[0].id])
-        # while (response['InstanceStatuses'][0]['InstanceStatus']['Status'] != 'ok'):     
-        #     time.sleep(30)     
-        #     response = client.describe_instance_status(InstanceIds=[instance[0].id])
         ipv4 = client.describe_instances(InstanceIds=[instance[0].id])['Reservations'][0]['Instances'][0]['NetworkInterfaces'][0]['PrivateIpAddresses'][0]['Association']['PublicIp']
         # ip = instance[0].private_ip_address
         # ipv4 = instance[0].public_ip_address
